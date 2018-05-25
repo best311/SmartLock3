@@ -29,7 +29,10 @@
         <activity
             android:name=".RegisterActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".RoomActivity" />
+        <activity
+            android:name=".door"
+            android:label="@string/title_activity_door"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

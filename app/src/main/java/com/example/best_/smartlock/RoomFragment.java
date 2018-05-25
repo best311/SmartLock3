@@ -57,7 +57,7 @@ public class RoomFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent itn = new Intent(getActivity(), RoomActivity.class);
+                Intent itn = new Intent(getActivity(), door.class);
                 startActivity(itn);
             }
         });
