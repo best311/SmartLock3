@@ -12,11 +12,6 @@
         android:title="" />
 
     <item
-        android:id="@+id/navigation_inactive"
-        android:icon="@drawable/ic_panorama_fish_eye_black_24dp"
-        android:title="" />
-
-    <item
         android:id="@+id/navigation_note"
         android:icon="@drawable/ic_event_note_black_24dp"
         android:title="" />

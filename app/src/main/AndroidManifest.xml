@@ -30,10 +30,6 @@
             android:name=".RegisterActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".RoomActivity" />
-        <activity
-            android:name=".AddHomeActivity"
-            android:label="@string/title_activity_add_home"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -2,9 +2,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.best_.smartlock.RoutineFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/buttonPost"
+            android:layout_width="120dp"
+            android:layout_height="61dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="116dp"
+            android:text="Post" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/addPost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="199dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/textInputEditTextPost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Post" />
+        </android.support.design.widget.TextInputLayout>
+
+
+    </RelativeLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

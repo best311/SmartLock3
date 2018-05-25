@@ -2,11 +2,13 @@ package com.example.best_.smartlock;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Message;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 
 public class InputValidation {
     private Context context;
@@ -84,4 +86,6 @@ public class InputValidation {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
+
+
 }

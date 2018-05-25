@@ -5,16 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static android.transition.Fade.IN;
 
 public class DatabaseHelper extends SQLiteOpenHelper{
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 20;
 
     // Database Name
     private static final String DATABASE_NAME = "UserManager.db";
@@ -22,21 +15,32 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     // User table name
     private static final String TABLE_USER = "user";
 
+    // User Table post
+    private static final String TABLE_COMMENT = "comment";
+
     // User Table Columns names
     private static final String COLUMN_USER_ID = "user_id";
     private static final String COLUMN_USER_EMAIL = "user_name";
     private static final String COLUMN_USER_PASSWORD = "user_password";
-    private static final String COLUMN_USER_KEY = "user_key";
+
+    // User Table Columns post
+    private static final String COLUMN_POST_ID = "post_id";
+    private static final String COLUMN_POST_SCSS = "post_detail";
 
     // create table sql query
     private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USER + "("
             + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + COLUMN_USER_EMAIL + " TEXT,"
-            + COLUMN_USER_PASSWORD + " TEXT"
-            + COLUMN_USER_KEY + "TEXT" + ")";
+            + COLUMN_USER_PASSWORD + " TEXT" + ")";
+
+    // create table sql query
+    private String CREATE_COMMENT_TABLE = "CREATE TABLE " + TABLE_COMMENT + "("
+            + COLUMN_POST_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + COLUMN_POST_SCSS + " TEXT" + ")";
 
     // drop table sql query
     private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_USER;
+    private String DROP_COMMENT_TABLE = "DROP TABLE IF EXISTS " + TABLE_COMMENT;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -45,6 +49,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_USER_TABLE);
+        db.execSQL(CREATE_COMMENT_TABLE);
     }
 
 
@@ -52,6 +57,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         db.execSQL(DROP_USER_TABLE);
+        db.execSQL(DROP_COMMENT_TABLE);
 
         onCreate(db);
 
@@ -66,6 +72,17 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
         db.insert(TABLE_USER, null, values);
         db.close();
+    }
+
+    public long addPost(Post post){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_POST_SCSS, post.getPost());
+
+        long row = db.insert(TABLE_COMMENT, null, values);
+        db.close();
+        return row;
     }
 
     public void updateUser(User user) {
@@ -99,36 +116,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         String selection = COLUMN_USER_EMAIL + " = ?" + " AND " + COLUMN_USER_PASSWORD + " = ?";
 
         String[] selectionArgs = {name, password};
-
-        Cursor cursor = db.query(TABLE_USER, //Table to query
-                columns,                    //columns to return
-                selection,                  //columns for the WHERE clause
-                selectionArgs,              //The values for the WHERE clause
-                null,                       //group the rows
-                null,                       //filter by row groups
-                null);                      //The sort order
-
-        int cursorCount = cursor.getCount();
-
-        cursor.close();
-        db.close();
-        if (cursorCount > 0) {
-            return true;
-        }
-
-        return false;
-    }
-
-    public boolean checkKey(String key){
-        String[] columns = {
-                COLUMN_USER_ID
-        };
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        String selection = COLUMN_USER_KEY + " = ?";
-
-        String[] selectionArgs = {key};
 
         Cursor cursor = db.query(TABLE_USER, //Table to query
                 columns,                    //columns to return

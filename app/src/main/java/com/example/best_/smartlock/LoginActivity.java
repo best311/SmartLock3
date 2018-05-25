@@ -101,6 +101,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 // Navigate to RegisterActivity
                 Intent intentRegister = new Intent(activity, RegisterActivity.class);
                 startActivity(intentRegister);
+                emptyInputEditText();
         }
     }
 
